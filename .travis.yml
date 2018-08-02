@@ -8,4 +8,4 @@ addons:
         token:
             secure: "KoEYZEQln/BJtfrkrqmEikpZaqBA65i66/3vRt6x8QKAY4JiA3LHLlVnYmrvDDlo5HNUOF9DbziHQapXnzEAOdlZKUY23kyc0GcLr3o1lFVeXek9+uPGOzC5WChQAc2voEMmPIwy/msIDBIiKoL7aygRH6NylzR547x+yUivH1SA8t/7HF6nIQgR8sHlTBFCTZO5pF0+mKRggJMPgf291+iwYw0sCt3GAiVVVf+SfD3vniQzNW7ZDpMUbi87faVHYGc1Za6lT6Ygs7x81oTEMbBPM9fH744NtnhQ6/vFgkKSFgnrta3FVTTv1/L2j8gv+DSpnVWIaEL2gAGUJ6IBN5lWpakyEZFTyNBmqAS7LuQytO+Ha2HYTJpV3IA2eaNpAUCtxqRA5qIqAlwZvxFdIbQ/BvcjXaQBIflsrVq77syYtIal5jcGH0QqrXAXB5ME/V22Ya9gLNh3oo7nDegPRqZNmx75q5dtxHvh7uy7syiccaxzdK9HFDgDl0rQwEmuEcr8H6lyC0GUqxzxVGnMhvh2i2oRKzxixzITO3DUmRrOVCl6SUCHfH5B9bmIbyJKu4/5/mmv14/7B3+yVZVYdSF4ynMNlcdFWKbyvn/hWynlnsuzHw/Ydc2ovHg6T8ya3CNZ73eyw8ZHhblXwaoa+/dQUY+GHFFawdt5DsbGxhg="
 script:
-    
+    - sonar-scanner
