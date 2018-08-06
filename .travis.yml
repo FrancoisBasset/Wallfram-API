@@ -7,4 +7,4 @@ addons:
         organization: "francoisbasset-github"
         project-key: "wallframapi"
 script:
-    - sonar-scanner
+- sonar-scanner
