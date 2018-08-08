@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Types = sequelize.define('Types', {
+    return sequelize.define('Types', {
         id: {
             type: DataTypes.BIGINT,
             primaryKey: true,
@@ -16,6 +16,4 @@ module.exports = (sequelize, DataTypes) => {
         paranoid: false,
         freezeTableName: true
     });
-
-    return Types;
 };
