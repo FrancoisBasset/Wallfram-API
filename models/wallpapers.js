@@ -6,6 +6,14 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             unique: true
         },
+        width: {
+            type: DataTypes.BIGINT,
+            allowNull: false
+        },
+        height: {
+            type: DataTypes.BIGINT,
+            allowNull: false
+        },
         filename: {
             type: DataTypes.STRING,
             allowNull: false,

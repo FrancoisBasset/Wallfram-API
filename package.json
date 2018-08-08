@@ -18,6 +18,7 @@
   "homepage": "https://github.com/FrancoisBasset/Wallfram-API#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "express-oas-generator": "^0.1.25",
     "sequelize": "^4.38.0",
     "sqlite3": "^4.0.2"
   }
