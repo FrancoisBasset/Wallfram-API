@@ -8,6 +8,18 @@ TypesController.findAll = () => {
     });
 };
 
+TypesController.findById = (id) => {
+    return Types.findById(id);
+};
+
+TypesController.findByValue = (value) => {
+    return Types.findOne({
+        where: {
+            value: value
+        }
+    });
+};
+
 TypesController.create = (value) => {
     return Types.create({
         value: value

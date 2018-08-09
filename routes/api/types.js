@@ -2,15 +2,27 @@ const express = require('express');
 const app = express.Router();
 
 const TypesController = require('../../controllers/types');
+const WallpapersController = require('../../controllers/wallpapers');
 
 app.get('/', (req, res) => {
-    TypesController.findAll()
-        .then(types => {
-            res.status(200).json(types);
-        })
-        .catch(err => {
-            res.status(500).json(err);
-        });
+    var seq = undefined;
+
+    if (Object.keys(req.query).length === 0) {
+        seq = TypesController.findAll();
+    } else if (Object.keys(req.query).length === 1) {
+        if (req.query.id !== undefined) {
+            seq = TypesController.findById(req.query.id);
+        }
+        if (req.query.value !== undefined) {
+            seq = TypesController.findByValue(req.query.value);
+        }
+    }
+
+    seq.then(types => {
+        res.status(200).json(types);
+    }).catch(err => {
+        res.status(500).json(err);
+    });
 });
 
 app.post('/', (req, res) => {
