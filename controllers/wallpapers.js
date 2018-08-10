@@ -3,6 +3,7 @@ const Colors = require('../models').Colors;
 
 const Op = require('../models').Sequelize.Op;
 
+const ColorsController = require('./colors');
 const WallpapersController = {};
 
 WallpapersController.findAll = () => {
@@ -27,6 +28,15 @@ WallpapersController.create = (width, height, filename, type) => {
         height: height,
         filename: filename,
         type: type
+    });
+};
+
+WallpapersController.destroy = (wallpaper) => {
+    ColorsController.destroyWallpaper(wallpaper);
+    return Wallpapers.destroy({
+        where: {
+            wallpaper: wallpaper
+        }
     });
 };
 
