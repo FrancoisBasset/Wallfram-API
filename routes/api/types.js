@@ -5,7 +5,7 @@ const TypesController = require('../../controllers/types');
 const WallpapersController = require('../../controllers/wallpapers');
 
 app.get('/', (req, res) => {
-    var seq = undefined;
+    var seq = null;
 
     if (Object.keys(req.query).length === 0) {
         seq = TypesController.findAll();
@@ -18,11 +18,13 @@ app.get('/', (req, res) => {
         }
     }
 
-    seq.then(types => {
-        res.status(200).json(types);
-    }).catch(err => {
-        res.status(500).json(err);
-    });
+    if (seq !== null) {
+        seq.then(types => {
+            res.status(200).json(types);
+        }).catch(err => {
+            res.status(500).json(err);
+        });
+    }
 });
 
 app.post('/', (req, res) => {

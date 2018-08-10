@@ -21,7 +21,7 @@ const ColorsController = require('../../controllers/colors');
 const Colors = require('../../models').Colors;
 
 app.get('/', (req, res) => {
-    var seq = undefined;
+    var seq = null;
 
     if (Object.keys(req.query).length === 0) {
         seq = WallpapersController.findAll()
