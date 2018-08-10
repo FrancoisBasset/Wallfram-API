@@ -59,17 +59,15 @@ app.get('/', (req, res) => {
                         res.status(200).json(wallpapers);
                     });
             } else if (wallpapers.length > 1) {
-                wallpapers.forEach(wallpaper => {
-                    ColorsController.findByWallpaper(wallpaper.dataValues.id)
+                for (var i = 0; i < wallpapers.length; i++) {
+                    ColorsController.findByWallpaper(wallpaper[i].dataValues.id)
                         .then(colors => {
-                            wallpaper.dataValues.colors = colors;
+                            wallpaper[i].dataValues.colors = colors;
                         });
-                });
+                }
 
                 res.status(200).json(wallpapers);
             }
-
-
         })
         .catch(err => {
             res.status(500).json(err);
@@ -101,14 +99,7 @@ app.post('/', upload.single('wallpaper'), (req, res) => {
 });
 
 app.post('/addColor', (req, res) => {
-    //ColorsController.create(req.body.wallpaper, req.body.red, req.body.green, req.body.blue, req.body.percent)
-    Colors.create({
-        wallpaper: req.body.wallpaper,
-        red: req.body.red,
-        green: req.body.green,
-        blue: req.body.blue,
-        percent: req.body.percent
-    })
+    ColorsController.create(req.body.wallpaper, req.body.red, req.body.green, req.body.blue, req.body.percent)
         .then(color => {
             res.status(201).json(color);
         })

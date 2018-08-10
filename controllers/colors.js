@@ -27,3 +27,5 @@ ColorsController.destroyWallpaper = (wallpaper) => {
         }
     });
 };
+
+module.exports = ColorsController;
