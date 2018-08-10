@@ -2,7 +2,6 @@ const Colors = require('../models').Colors;
 const ColorsController = {};
 
 ColorsController.findByWallpaper = (wallpaper) => {
-    console.log(wallpaper);
     return Colors.findAll({
         where: {
             wallpaper: wallpaper

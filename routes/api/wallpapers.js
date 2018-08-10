@@ -33,7 +33,6 @@ app.get('/', (req, res) => {
                 Object.keys(req.query).forEach(q => {
                     switch (q) {
                         case 'type':
-                            console.log(req.query);
                             wallpapers = WallpapersController.findByType(wallpapers, parseInt(req.query.type));
                             break;
                         case 'dimensions':
@@ -51,23 +50,7 @@ app.get('/', (req, res) => {
 
     seq
         .then(wallpapers => {
-            if (wallpapers.constructor !== Array) {
-                ColorsController.findByWallpaper(wallpapers.dataValues.id)
-                    .then(colors => {
-                        console.log(colors);
-                        wallpapers.dataValues.colors = colors;
-                        res.status(200).json(wallpapers);
-                    });
-            } else if (wallpapers.length > 1) {
-                for (var i = 0; i < wallpapers.length; i++) {
-                    ColorsController.findByWallpaper(wallpaper[i].dataValues.id)
-                        .then(colors => {
-                            wallpaper[i].dataValues.colors = colors;
-                        });
-                }
-
-                res.status(200).json(wallpapers);
-            }
+            res.status(200).json(wallpapers);
         })
         .catch(err => {
             res.status(500).json(err);
@@ -96,6 +79,20 @@ app.post('/', upload.single('wallpaper'), (req, res) => {
        .catch(err => {
            res.status(500).json(err);
        });
+});
+
+app.get('/colors', (req, res) => {
+    if (Object.keys(req.query).length === 1 && req.query.id !== undefined) {
+        ColorsController.findByWallpaper(req.query.id)
+            .then(colors => {
+                res.status(200).json(colors);
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            });
+    } else {
+        res.status(400).end();
+    }
 });
 
 app.post('/addColor', (req, res) => {
