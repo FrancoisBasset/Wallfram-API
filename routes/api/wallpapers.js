@@ -109,8 +109,14 @@ app.delete('/', (req, res) => {
     if (Object.keys(req.query).length === 1 && req.query.id !== undefined) {
         WallpapersController.destroy(req.query.id)
             .then(wallpaper => {
-                fs.delete("./files/wallpapers/" + wallpaper.filename);
-                res.status(200).json(wallpaper);
+                console.log(wallpaper);
+                fs.unlink("./files/wallpapers/" + wallpaper.dataValues.filename, err => {
+                    if (err !== null) {
+                        res.status(500).json(err);
+                    } else {
+                        res.status(200).json(wallpaper);
+                    }
+                });
             })
             .catch(err => {
                 res.status(500).json(err);

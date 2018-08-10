@@ -20,7 +20,7 @@ ColorsController.create = (wallpaper, red, green, blue, percent) => {
 };
 
 ColorsController.destroyWallpaper = (wallpaper) => {
-    Colors.destroy({
+    return Colors.destroy({
         where: {
             wallpaper: wallpaper
         }

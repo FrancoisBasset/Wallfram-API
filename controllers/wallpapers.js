@@ -33,11 +33,12 @@ WallpapersController.create = (width, height, filename, type) => {
 
 WallpapersController.destroy = (wallpaper) => {
     ColorsController.destroyWallpaper(wallpaper);
-    return Wallpapers.destroy({
-        where: {
-            wallpaper: wallpaper
-        }
-    });
+
+    return WallpapersController.findById(wallpaper)
+        .then(wall => {
+            wall.destroy();
+            return wall;
+        });
 };
 
 module.exports = WallpapersController;
