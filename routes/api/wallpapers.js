@@ -30,6 +30,8 @@ app.get('/', (req, res) => {
     } else {
         seq = WallpapersController.findAll()
             .then(wallpapers => {
+                wallpapers = wallpapers.map(w => w.dataValues);
+
                 Object.keys(req.query).forEach(q => {
                     switch (q) {
                         case 'type':
@@ -40,6 +42,11 @@ app.get('/', (req, res) => {
                             const height = parseInt(req.query.dimensions.split('x')[1]);
 
                             wallpapers = WallpapersController.findByDimensions(wallpapers, width, height);
+                            break;
+                        case 'color':
+                            var cs = req.query.color.split(',').map(c => parseInt(c));
+                            wallpapers = WallpapersController.findByColors(cs[0], cs[1], cs[2], cs[3]);
+
                             break;
                     }
                 });
@@ -61,7 +68,7 @@ app.get('/download', (req, res) => {
     if (Object.keys(req.query).length === 1 && req.query.id !== undefined) {
         WallpapersController.findById(req.query.id)
             .then(wallpaper => {
-                res.download("./files/wallpapers/" + wallpaper.filename);
+                res.download('./files/wallpapers/' + wallpaper.filename);
             })
             .catch(err => {
                 res.status(500).json(err);
@@ -110,7 +117,7 @@ app.delete('/', (req, res) => {
         WallpapersController.destroy(req.query.id)
             .then(wallpaper => {
                 console.log(wallpaper);
-                fs.unlink("./files/wallpapers/" + wallpaper.dataValues.filename, err => {
+                fs.unlink('./files/wallpapers/' + wallpaper.dataValues.filename, err => {
                     if (err !== null) {
                         res.status(500).json(err);
                     } else {

@@ -14,12 +14,31 @@ WallpapersController.findById = (id) => {
     return Wallpapers.findById(id);
 };
 
+WallpapersController.findByIds = (ids) => {
+    return Wallpapers.findAll({
+        where: {
+            id: ids
+        }
+    });
+};
+
 WallpapersController.findByType = (wallpapers, type) => {
-    return wallpapers.filter(w => w.dataValues.type === type);
+    return wallpapers.filter(w => w.type === type);
 };
 
 WallpapersController.findByDimensions = (wallpapers, width, height) => {
-    return wallpapers.filter(w => w.dataValues.width === width && w.dataValues.height === height);
+    return wallpapers.filter(w => w.width === width && w.height === height);
+};
+
+WallpapersController.findByColors = (red, green, blue, percent) => {
+    return ColorsController.findColors(red, green, blue, percent)
+        .then(cs => {
+            cs = cs.map(cs => cs.dataValues.wallpaper).filter(function(elem, index, self) {
+                return index === self.indexOf(elem);
+            });
+
+            return WallpapersController.findByIds(cs);
+        });
 };
 
 WallpapersController.create = (width, height, filename, type) => {
