@@ -10,7 +10,7 @@ expressOasGenerator.init(app, {});
 ModelIndex
     .openDatabase()
     .then(() => {
-        app.listen(8080, () => {
+        app.listen(process.env.PORT || 8080, () => {
             console.log('Server is starting in port 8080');
         });
 
