@@ -1,5 +1,4 @@
 .idea
-db
 node_modules
 .scannerwork
 package-lock.json
